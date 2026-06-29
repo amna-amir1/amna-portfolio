@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Amna Bibi – AI Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --card: #16161f;
+    --border: #1e1e2e;
+    --accent: #7c6dfa;
+    --accent2: #a78bfa;
+    --green: #34d399;
+    --text: #e2e2f0;
+    --muted: #6b6b8a;
+    --tag-bg: #1a1a2e;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 2.5rem;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--accent2);
+    letter-spacing: 0.05em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none; font-size: 0.875rem;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 8rem 2.5rem 4rem;
+    max-width: 1100px; margin: 0 auto;
+    position: relative;
+  }
+  .hero-content { max-width: 700px; }
+  .hero-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--green);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 28px; height: 2px;
+    background: var(--green);
+    display: inline-block;
+  }
+  h1 {
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+  .name-accent { color: var(--accent2); }
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    max-width: 540px;
+    line-height: 1.7;
+  }
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .btn {
+    padding: 0.75rem 1.75rem;
+    border-radius: 8px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+  }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent2); }
+
+  /* FLOATING GRID BG */
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; right: -10%; width: 55%; height: 100%;
+    background: radial-gradient(ellipse at 70% 40%, rgba(124,109,250,0.12) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  /* SECTION */
+  section {
+    max-width: 1100px; margin: 0 auto;
+    padding: 5rem 2.5rem;
+  }
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 3rem;
+  }
+
+  /* STATS BAR */
+  .stats-bar {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 5rem;
+  }
+  .stat {
+    background: var(--surface);
+    padding: 1.75rem 1.5rem;
+    text-align: center;
+  }
+  .stat-num {
+    font-size: 2rem; font-weight: 700;
+    color: var(--accent2);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 0.25rem; }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.25rem;
+  }
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem;
+    transition: border-color 0.25s, transform 0.25s;
+    position: relative; overflow: hidden;
+  }
+  .project-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+  }
+  .project-card.featured {
+    grid-column: span 2;
+    border-color: rgba(124,109,250,0.3);
+  }
+  @media (max-width: 700px) { .project-card.featured { grid-column: span 1; } }
+  .project-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .project-card:hover::before { opacity: 1; }
+  .project-top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+  .project-icon {
+    width: 40px; height: 40px;
+    background: var(--tag-bg);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+  }
+  .project-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    padding: 0.25rem 0.6rem;
+    background: rgba(52,211,153,0.1);
+    color: var(--green);
+    border-radius: 20px;
+    border: 1px solid rgba(52,211,153,0.2);
+  }
+  .project-badge.wip {
+    background: rgba(251,191,36,0.1);
+    color: #fbbf24;
+    border-color: rgba(251,191,36,0.2);
+  }
+  .project-title {
+    font-size: 1.05rem; font-weight: 600;
+    margin-bottom: 0.6rem;
+  }
+  .project-desc {
+    font-size: 0.875rem; color: var(--muted);
+    line-height: 1.65; margin-bottom: 1.25rem;
+  }
+  .tags {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+  }
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    padding: 0.2rem 0.55rem;
+    background: var(--tag-bg);
+    color: var(--accent2);
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+  }
+  .skill-group {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+  .skill-group-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent2);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .skill-list {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+  }
+  .skill-chip {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.7rem;
+    background: var(--tag-bg);
+    color: var(--text);
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+
+  /* EXPERIENCE */
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .timeline-item:last-child { border-bottom: none; }
+  .timeline-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--muted);
+    padding-top: 0.2rem;
+  }
+  .timeline-company { font-weight: 600; font-size: 1rem; margin-bottom: 0.2rem; }
+  .timeline-role {
+    font-size: 0.85rem; color: var(--accent2); margin-bottom: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .timeline-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.7; }
+
+  /* CONTACT */
+  .contact-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 3rem;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .contact-box::before {
+    content: '';
+    position: absolute; top: -40%; left: 50%; transform: translateX(-50%);
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(124,109,250,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .contact-box h2 { font-size: 2rem; margin-bottom: 0.75rem; }
+  .contact-box p { color: var(--muted); margin-bottom: 2rem; }
+  .contact-links {
+    display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem;
+  }
+  .contact-link {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 0.6rem 1.2rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: all 0.2s;
+  }
+  .contact-link:hover { color: var(--accent2); border-color: var(--accent); }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 600px) {
+    nav { padding: 1rem 1.25rem; }
+    .nav-links { gap: 1rem; }
+    section { padding: 4rem 1.25rem; }
+    .timeline-item { grid-template-columns: 1fr; gap: 0.25rem; }
+    .contact-box { padding: 2rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">amna.bibi</span>
+  <ul class="nav-links">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">Available for opportunities</div>
+    <h1>Hi, I'm <span class="name-accent">Amna Bibi</span></h1>
+    <p class="hero-sub">
+      AI Engineer building production-ready systems — from autonomous multi-agent pipelines and RAG chatbots to deep learning models — end-to-end, data to deployment.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View Projects →</a>
+      <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<section style="padding-top:0;">
+  <div class="stats-bar">
+    <div class="stat"><div class="stat-num">15+</div><div class="stat-label">AI Projects Built</div></div>
+    <div class="stat"><div class="stat-num">3</div><div class="stat-label">Internships & Roles</div></div>
+    <div class="stat"><div class="stat-num">2</div><div class="stat-label">Production Systems</div></div>
+    <div class="stat"><div class="stat-num">LLM</div><div class="stat-label">LangChain · LangGraph · RAG</div></div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">// work</div>
+  <div class="section-title">Featured Projects</div>
+  <div class="projects-grid">
+
+    <div class="project-card featured">
+      <div class="project-top">
+        <div class="project-icon">🤖</div>
+        <span class="project-badge wip">In Development</span>
+      </div>
+      <div class="project-title">LinkedIn Lead Generation & Automation Agent</div>
+      <div class="project-desc">Fully autonomous multi-agent system for end-to-end LinkedIn lead generation, qualification, and outreach — zero manual intervention. Scrapes profiles via Playwright, scores leads with LLaMA & Claude Sonnet, and automates connection requests, personalized messages, and follow-ups using LangGraph orchestration.</div>
+      <div class="tags">
+        <span class="tag">LangGraph</span><span class="tag">LLaMA</span><span class="tag">Claude Sonnet</span><span class="tag">Playwright</span><span class="tag">Multi-Agent</span><span class="tag">FastAPI</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">
+        <div class="project-icon">💬</div>
+        <span class="project-badge">Production</span>
+      </div>
+      <div class="project-title">RAG Chatbot — Symtera Technologies</div>
+      <div class="project-desc">Production-ready RAG chatbot with ChromaDB vector store, BAAI embeddings, cosine similarity re-ranking, and session-based memory. Deployed as a FastAPI REST service using LLaMA 3.1 via Groq API.</div>
+      <div class="tags">
+        <span class="tag">RAG</span><span class="tag">ChromaDB</span><span class="tag">LLaMA 3.1</span><span class="tag">FastAPI</span><span class="tag">LangChain</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">
+        <div class="project-icon">🛡️</div>
+        <span class="project-badge">Final Year Project</span>
+      </div>
+      <div class="project-title">Online Payment Fraud Detection</div>
+      <div class="project-desc">End-to-end ML pipeline for identifying fraudulent transactions with feature engineering, EDA, class imbalance handling, and confusion matrix analysis. Presented at Tech Expo 2024.</div>
+      <div class="tags">
+        <span class="tag">Scikit-learn</span><span class="tag">EDA</span><span class="tag">Feature Engineering</span><span class="tag">SMOTE</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">
+        <div class="project-icon">❤️</div>
+        <span class="project-badge">Deep Learning</span>
+      </div>
+      <div class="project-title">ECG Signal Classification</div>
+      <div class="project-desc">Deep learning model for ECG signal classification into different heart conditions, with LSTM-based pattern detection and time-series preprocessing pipeline.</div>
+      <div class="tags">
+        <span class="tag">LSTM</span><span class="tag">TensorFlow</span><span class="tag">Time-Series</span><span class="tag">Keras</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">
+        <div class="project-icon">🐦</div>
+        <span class="project-badge">NLP</span>
+      </div>
+      <div class="project-title">Twitter Sentiment Analysis (BERT)</div>
+      <div class="project-desc">Fine-tuned pre-trained BERT model for sentiment classification on social media text, with full NLP preprocessing and transformer-based modeling.</div>
+      <div class="tags">
+        <span class="tag">BERT</span><span class="tag">Transformers</span><span class="tag">NLP</span><span class="tag">HuggingFace</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">
+        <div class="project-icon">🎬</div>
+        <span class="project-badge">ML</span>
+      </div>
+      <div class="project-title">Movie Recommendation System</div>
+      <div class="project-desc">Recommendation engine using collaborative filtering, user-item matrices, and matrix factorization for personalized movie suggestions.</div>
+      <div class="tags">
+        <span class="tag">Collaborative Filtering</span><span class="tag">Matrix Factorization</span><span class="tag">Pandas</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">// stack</div>
+  <div class="section-title">Skills & Tools</div>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="skill-group-title">AI / LLM</div>
+      <div class="skill-list">
+        <span class="skill-chip">LangChain</span>
+        <span class="skill-chip">LangGraph</span>
+        <span class="skill-chip">RAG</span>
+        <span class="skill-chip">Prompt Engineering</span>
+        <span class="skill-chip">LLaMA</span>
+        <span class="skill-chip">BERT</span>
+        <span class="skill-chip">GPT-Neo</span>
+        <span class="skill-chip">Groq API</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">ML / DL</div>
+      <div class="skill-list">
+        <span class="skill-chip">TensorFlow</span>
+        <span class="skill-chip">Keras</span>
+        <span class="skill-chip">Scikit-learn</span>
+        <span class="skill-chip">CNN</span>
+        <span class="skill-chip">LSTM</span>
+        <span class="skill-chip">SMOTE</span>
+        <span class="skill-chip">NumPy</span>
+        <span class="skill-chip">Pandas</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Backend & Data</div>
+      <div class="skill-list">
+        <span class="skill-chip">FastAPI</span>
+        <span class="skill-chip">PostgreSQL</span>
+        <span class="skill-chip">ChromaDB</span>
+        <span class="skill-chip">Python</span>
+        <span class="skill-chip">Playwright</span>
+        <span class="skill-chip">Joblib</span>
+        <span class="skill-chip">REST APIs</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Automation & Tools</div>
+      <div class="skill-list">
+        <span class="skill-chip">n8n</span>
+        <span class="skill-chip">Airtable</span>
+        <span class="skill-chip">GitHub</span>
+        <span class="skill-chip">Jupyter</span>
+        <span class="skill-chip">Google Colab</span>
+        <span class="skill-chip">Kaggle</span>
+        <span class="skill-chip">VS Code</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">// experience</div>
+  <div class="section-title">Work History</div>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-date">2024 – Present</div>
+      <div>
+        <div class="timeline-company">Symtera Technologies</div>
+        <div class="timeline-role">AI Engineer · Lahore</div>
+        <div class="timeline-desc">Built a production RAG chatbot deployed as a FastAPI service. Architected and developed a multi-agent LinkedIn automation system with LangGraph. Handled PostgreSQL integration, data cleaning, FastAPI endpoint development, and full technical documentation including PRD and system architecture.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">2024</div>
+      <div>
+        <div class="timeline-company">Elevvo Pathways</div>
+        <div class="timeline-role">Machine Learning Intern · Remote</div>
+        <div class="timeline-desc">Built student score prediction (regression), loan approval classification with SMOTE, a collaborative filtering movie recommender, and a CNN-based traffic sign recognition system.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">2023 – 2024</div>
+      <div>
+        <div class="timeline-company">DeVvibe</div>
+        <div class="timeline-role">AI / Deep Learning Intern · Multan</div>
+        <div class="timeline-desc">Delivered 12+ projects including fraud detection, text generation (Shakespeare-style), sentiment analysis, credit risk scoring, COVID-19 X-ray detection, LSTM-based ECG analysis, human activity recognition, stock prediction, and a custom AI chatbot.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="padding-bottom:2rem;">
+  <div class="contact-box">
+    <h2>Let's Build Something</h2>
+    <p>Open to AI Engineer roles in Lahore. On-site or hybrid preferred.</p>
+    <div class="contact-links">
+      <a href="mailto:amnabibi1408@gmail.com" class="contact-link">✉ amnabibi1408@gmail.com</a>
+      <a href="https://linkedin.com/in/amna-bibi" target="_blank" class="contact-link">in linkedin.com/in/amna-bibi</a>
+      <a href="https://github.com/amna-amir1" target="_blank" class="contact-link">⌥ github.com/amna-amir1</a>
+      <a href="tel:03361346967" class="contact-link">☏ 0336-1346967</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  built with intention · amna bibi · lahore, pakistan · 2026
+</footer>
+
+</body>
+</html>
